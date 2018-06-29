@@ -25,7 +25,9 @@ NSString* defaultSuiteName = nil;
     if (nil == value) {
         NSError* error = nil;
         NSArray *array = [[self getDefaultUser] arrayForKey:key];
+        if (nil == array) return nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&error];
+        if (error != nil) return nil;
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     } else {
         return value;
